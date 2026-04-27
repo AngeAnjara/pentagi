@@ -31,6 +31,7 @@ const SettingsPrompt = lazy(() => import('@/pages/settings/settings-prompt'));
 const SettingsPrompts = lazy(() => import('@/pages/settings/settings-prompts'));
 const SettingsProvider = lazy(() => import('@/pages/settings/settings-provider'));
 const SettingsProviders = lazy(() => import('@/pages/settings/settings-providers'));
+const UptimeKuma = lazy(() => import('@/pages/uptime-kuma'));
 
 const App = () => {
     const renderProtectedRoute = () => (
@@ -85,6 +86,10 @@ const App = () => {
                                             </Route>
 
                                             {/* Other pages can be added here without FlowsProvider */}
+                                            <Route
+                                                element={<UptimeKuma />}
+                                                path="uptime"
+                                            />
                                         </Route>
 
                                         {/* Settings with nested routes */}

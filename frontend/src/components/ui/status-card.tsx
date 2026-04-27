@@ -14,11 +14,15 @@ interface StatusCardProps {
 export function StatusCard({ action, className, description, icon, title }: StatusCardProps) {
     return (
         <Card className={cn('panel-shell', className)}>
-            <CardContent className="flex flex-col items-center justify-center px-4 py-8 text-center">
-                {icon && <div className="mb-4 flex items-center justify-center">{icon}</div>}
-                <h3 className="text-lg font-semibold text-foreground">{title}</h3>
-                {description && <div className="mt-2 max-w-sm text-sm text-muted-foreground">{description}</div>}
-                {action && <div className="mt-4">{action}</div>}
+            <CardContent className="flex min-h-[18rem] flex-col items-center justify-center px-6 py-10 text-center">
+                {icon && (
+                    <div className="mb-5 flex size-16 items-center justify-center rounded-2xl border border-slate-800 bg-slate-900/80 text-slate-300">
+                        {icon}
+                    </div>
+                )}
+                <h3 className="text-xl font-semibold tracking-tight text-slate-50">{title}</h3>
+                {description && <div className="mt-3 max-w-md text-sm leading-6 text-slate-400">{description}</div>}
+                {action && <div className="mt-6">{action}</div>}
             </CardContent>
         </Card>
     );

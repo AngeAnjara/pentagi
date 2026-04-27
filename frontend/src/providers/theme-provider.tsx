@@ -19,23 +19,23 @@ interface ThemeProviderState {
 
 const initialState: ThemeProviderState = {
     setTheme: () => null,
-    theme: 'system',
+    theme: 'dark',
 };
 
 export const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export const ThemeProvider = ({
     children,
-    defaultTheme = 'system',
+    defaultTheme = 'dark',
     storageKey = 'theme',
     ...props
 }: ThemeProviderProps) => {
     const [theme, setTheme] = useState<Theme>(() => {
         const storedTheme = localStorage.getItem(storageKey);
 
-        // If no stored theme, use system (default)
+        // If no stored theme, default to dark for Santatra App
         if (!storedTheme) {
-            return 'system';
+            return defaultTheme;
         }
 
         return isThemeValid(storedTheme) ? storedTheme : defaultTheme;

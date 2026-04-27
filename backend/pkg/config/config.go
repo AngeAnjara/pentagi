@@ -55,6 +55,9 @@ type Config struct {
 	ScraperPublicURL  string `env:"SCRAPER_PUBLIC_URL"`
 	ScraperPrivateURL string `env:"SCRAPER_PRIVATE_URL"`
 
+	// Uptime Kuma integration
+	UptimeKumaURL string `env:"UPTIME_KUMA_URL" envDefault:"http://127.0.0.1:3001"`
+
 	// OpenAI
 	OpenAIKey       string `env:"OPEN_AI_KEY"`
 	OpenAIServerURL string `env:"OPEN_AI_SERVER_URL" envDefault:"https://api.openai.com/v1"`

@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
 import {
+    HeartPulse,
     ChevronsUpDown,
     Clock,
     GitFork,
@@ -55,6 +56,7 @@ const MainSidebar = () => {
     const [clickedButtons, setClickedButtons] = useState<Set<string>>(new Set());
 
     const isSettingsActive = useMatch('/settings/*');
+    const isUptimeActive = useMatch('/uptime/*');
     const { flowId: flowIdParam } = useParams<{ flowId: string }>();
     const location = useLocation();
 
@@ -173,6 +175,17 @@ const MainSidebar = () => {
                                         <Plus />
                                     </Link>
                                 </SidebarMenuAction>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton
+                                    asChild
+                                    isActive={!!isUptimeActive}
+                                >
+                                    <Link to="/uptime">
+                                        <HeartPulse />
+                                        Uptime
+                                    </Link>
+                                </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
                     </SidebarGroupContent>

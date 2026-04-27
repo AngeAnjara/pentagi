@@ -1,6 +1,7 @@
 package router
 
 import (
+	"encoding/json"
 	"encoding/gob"
 	"net"
 	"net/http"
@@ -47,6 +48,7 @@ var frontendRoutes = []string{
 	"/oauth",
 	"/login",
 	"/flows",
+	"/uptime",
 	"/settings",
 }
 
@@ -242,6 +244,7 @@ func NewRouter(
 		setRolesGroup(privateGroup, roleService)
 		setUsersGroup(privateGroup, userService)
 		setTokensGroup(privateGroup, tokenService)
+		setIntegrationGroup(privateUserGroup, cfg)
 	}
 
 	if cfg.StaticURL != nil && cfg.StaticURL.Scheme != "" && cfg.StaticURL.Host != "" {
@@ -303,6 +306,19 @@ func NewRouter(
 	}
 
 	return router
+}
+
+func setIntegrationGroup(parent *gin.RouterGroup, cfg *config.Config) {
+	integrationGroup := parent.Group("/integrations")
+	{
+		integrationGroup.GET("/uptime-kuma/info", func(c *gin.Context) {
+			c.Header("Content-Type", "application/json")
+			_ = json.NewEncoder(c.Writer).Encode(gin.H{
+				"name": "Uptime Kuma",
+				"url":  cfg.UptimeKumaURL,
+			})
+		})
+	}
 }
 
 func setProvidersGroup(parent *gin.RouterGroup, svc *services.ProviderService) {

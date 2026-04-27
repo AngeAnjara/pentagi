@@ -9,6 +9,8 @@ volumes:
     driver: local
   pentagi-postgres-data:
     driver: local
+  uptime-kuma-data:
+    driver: local
 
 networks:
   pentagi-network:
@@ -248,3 +250,17 @@ services:
     networks:
       - pentagi-network
     shm_size: 2g
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    restart: unless-stopped
+    container_name: uptime-kuma
+    hostname: uptime-kuma
+    expose:
+      - 3001/tcp
+    ports:
+      - ${UPTIME_KUMA_LISTEN_IP:-127.0.0.1}:${UPTIME_KUMA_LISTEN_PORT:-3001}:3001
+    volumes:
+      - uptime-kuma-data:/app/data
+    networks:
+      - pentagi-network

@@ -720,7 +720,7 @@ const Flows = () => {
     );
 
     const pageHeader = (
-        <header className="bg-background/72 sticky top-0 z-10 flex h-16 w-full shrink-0 items-center gap-2 border-b border-white/8 backdrop-blur-md transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16">
+        <header className="sticky top-0 z-10 flex h-16 w-full shrink-0 items-center gap-2 border-b border-slate-800/80 bg-slate-950/72 backdrop-blur-xl transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16">
             <div className="flex items-center gap-3 px-5">
                 <SidebarTrigger className="-ml-1" />
                 <Separator
@@ -730,14 +730,16 @@ const Flows = () => {
                 <Breadcrumb>
                     <BreadcrumbList>
                         <BreadcrumbItem className="gap-2">
-                            <div className="bg-primary/15 text-primary flex size-8 items-center justify-center rounded-lg">
+                            <div className="bg-primary/15 text-primary ring-primary/20 flex size-9 items-center justify-center rounded-xl ring-1">
                                 <GitFork className="size-4" />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-muted-foreground text-[11px] font-medium uppercase tracking-[0.18em]">
                                     Workspace
                                 </span>
-                                <BreadcrumbPage className="text-base font-semibold tracking-tight">Flows</BreadcrumbPage>
+                                <BreadcrumbPage className="text-base font-semibold tracking-tight text-slate-50">
+                                    Flows
+                                </BreadcrumbPage>
                             </div>
                         </BreadcrumbItem>
                     </BreadcrumbList>
@@ -759,7 +761,7 @@ const Flows = () => {
         return (
             <>
                 {pageHeader}
-                <div className="flex flex-col gap-4 p-5">
+                <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 p-5">
                     <StatusCard
                         description="Please wait while we fetch your conversation flows"
                         icon={<Loader2 className="text-muted-foreground size-16 animate-spin" />}
@@ -775,7 +777,7 @@ const Flows = () => {
         return (
             <>
                 {pageHeader}
-                <div className="flex flex-col gap-4 p-5">
+                <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 p-5">
                     <StatusCard
                         action={
                             <Button
@@ -798,7 +800,7 @@ const Flows = () => {
     return (
         <>
             {pageHeader}
-            <div className="flex flex-col gap-4 p-5 pt-4">
+            <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 p-5 pt-4">
                 <DataTable<Flow>
                     columns={columns}
                     columnVisibility={columnVisibility}

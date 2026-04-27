@@ -138,7 +138,7 @@ const SidebarProvider = React.forwardRef<
             <TooltipProvider delayDuration={0}>
                 <div
                     className={cn(
-                        'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full',
+                        'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full bg-transparent',
                         className,
                     )}
                     ref={ref}
@@ -242,7 +242,7 @@ const Sidebar = React.forwardRef<
                 {...props}
             >
                 <div
-                    className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+                    className="bg-sidebar/98 border-sidebar-border/80 flex h-full w-full flex-col border-r shadow-[20px_0_60px_rgba(2,6,23,0.32)] group-data-[variant=floating]:rounded-2xl group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
                     data-sidebar="sidebar"
                 >
                     {children}
@@ -310,7 +310,7 @@ const SidebarInset = React.forwardRef<HTMLDivElement, React.ComponentProps<'main
     return (
         <main
             className={cn(
-                'bg-background relative flex min-h-svh flex-1 flex-col',
+                'bg-transparent relative flex min-h-svh flex-1 flex-col',
                 'max-w-[100vw]',
                 'md:peer-data-[state=expanded]:max-w-[calc(100vw-var(--sidebar-width))]',
                 'md:peer-data-[state=collapsed]:max-w-[100vw]',

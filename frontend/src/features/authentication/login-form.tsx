@@ -158,11 +158,13 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
 
     if (shouldShowPasswordChange) {
         return (
-            <div className="mx-auto flex w-[350px] flex-col gap-6">
-                <h1 className="text-center text-3xl font-bold">Update Password</h1>
-                <p className="text-muted-foreground text-center text-sm">
+            <div className="panel-shell mx-auto flex w-full max-w-[28rem] flex-col gap-6 p-8">
+                <div className="space-y-2 text-center">
+                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50">Update Password</h1>
+                    <p className="text-center text-sm leading-6 text-slate-400">
                     You need to change your password before continuing.
-                </p>
+                    </p>
+                </div>
                 <PasswordChangeForm
                     isModal={false}
                     onSkip={handleSkipPasswordChange}
@@ -176,10 +178,16 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
     return (
         <Form {...form}>
             <form
-                className="mx-auto grid w-[350px] gap-8"
+                className="panel-shell mx-auto grid w-full max-w-[28rem] gap-8 p-8"
                 onSubmit={form.handleSubmit(handleSubmit)}
             >
-                <h1 className="text-center text-3xl font-bold">PentAGI</h1>
+                <div className="space-y-3 text-center">
+                    <div className="text-primary text-xs font-medium uppercase tracking-[0.28em]">Santatra App</div>
+                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50">Sign in</h1>
+                    <p className="text-sm leading-6 text-slate-400">
+                        Access flows, monitoring and integrated tools from one secure workspace.
+                    </p>
+                </div>
 
                 {providers?.length > 0 && (
                     <>
@@ -188,11 +196,12 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                                 .filter((provider) => providers.includes(provider.id))
                                 .map((provider) => (
                                     <Button
+                                        className="border-slate-800 bg-slate-900/80 text-slate-100 hover:bg-slate-800"
                                         disabled={isSubmitting}
                                         key={provider.id}
                                         onClick={() => handleProviderLogin(provider.id)}
                                         type="button"
-                                        variant="secondary"
+                                        variant="outline"
                                     >
                                         {provider.icon}
                                         {provider.name}
@@ -202,10 +211,10 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
 
                         <div className="relative -mb-4">
                             <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-300" />
+                                <div className="w-full border-t border-slate-800" />
                             </div>
                             <div className="relative flex justify-center text-sm">
-                                <span className="bg-background px-2">or</span>
+                                <span className="bg-slate-950 px-2 text-slate-500">or</span>
                             </div>
                         </div>
                     </>
@@ -222,6 +231,7 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                                     <Input
                                         {...field}
                                         autoFocus
+                                        className="border-slate-800 bg-slate-900/70 text-slate-100 placeholder:text-slate-500"
                                         placeholder="Enter your email"
                                     />
                                 </FormControl>
@@ -239,6 +249,7 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                                 <FormControl>
                                     <Input
                                         {...field}
+                                        className="border-slate-800 bg-slate-900/70 text-slate-100 placeholder:text-slate-500"
                                         placeholder="Enter your password"
                                         type="password"
                                     />
@@ -257,7 +268,7 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                         <span>Sign in</span>
                     </Button>
 
-                    {error && <FormMessage>{error}</FormMessage>}
+                    {error && <FormMessage className="text-center">{error}</FormMessage>}
                 </div>
             </form>
         </Form>
