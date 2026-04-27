@@ -308,7 +308,7 @@ const UptimeKuma = () => {
                     return;
                 }
 
-                socket = window.io('/uptime/app', {
+                socket = window.io({
                     path: '/uptime/app/socket.io/',
                     transports: ['websocket', 'polling'],
                     withCredentials: true,
