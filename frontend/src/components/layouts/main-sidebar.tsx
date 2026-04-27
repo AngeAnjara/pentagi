@@ -137,8 +137,7 @@ const MainSidebar = () => {
                             <Logo className="hover:animate-logo-spin size-6" />
                         </div>
                         <div className="grid flex-1 text-left leading-tight">
-                            <span className="truncate font-semibold tracking-tight">PentAGI</span>
-                            <span className="text-muted-foreground truncate text-[11px]">AI workflow cockpit</span>
+                            <span className="truncate font-semibold tracking-tight">Santatra App</span>
                         </div>
                     </SidebarMenuItem>
                 </SidebarMenu>

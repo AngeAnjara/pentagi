@@ -459,7 +459,7 @@
 }
 
 @utility panel-shell {
-    @apply border-border/70 bg-card/75 rounded-xl border shadow-lg backdrop-blur-md;
+    @apply rounded-xl border border-slate-800/80 bg-slate-950/72 shadow-[0_18px_40px_rgba(2,6,23,0.38)] backdrop-blur-md;
 }
 
 .prose-xs {

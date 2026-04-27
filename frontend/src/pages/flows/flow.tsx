@@ -93,7 +93,7 @@ const FlowReportDropdown = () => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
-                    className="shrink-0"
+                    className="shrink-0 text-slate-300 hover:bg-slate-800/80 hover:text-white"
                     disabled={isReportDisabled}
                     variant="ghost"
                 >
@@ -170,7 +170,7 @@ const Flow = () => {
 
     return (
         <>
-            <header className="bg-background/72 sticky top-0 z-10 flex h-16 w-full shrink-0 items-center gap-2 border-b border-white/8 backdrop-blur-md transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16">
+            <header className="sticky top-0 z-10 flex h-16 w-full shrink-0 items-center gap-2 border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16">
                 <div className="flex w-full items-center justify-between gap-2 px-5">
                     <div className="flex items-center gap-2">
                         <SidebarTrigger className="-ml-1" />
@@ -196,7 +196,7 @@ const Flow = () => {
                                     )}
                                     <div className="flex flex-col">
                                         <span className="text-muted-foreground text-[11px] font-medium uppercase tracking-[0.18em]">
-                                            Active Flow
+                                            Flow
                                         </span>
                                         <BreadcrumbPage className="max-w-[38vw] truncate text-base font-semibold tracking-tight">
                                             {flowData?.flow?.title || 'Select a flow'}
@@ -209,9 +209,9 @@ const Flow = () => {
                     {!!(flowData?.tasks ?? [])?.length && <FlowReportDropdown />}
                 </div>
             </header>
-            <div className="relative flex h-[calc(100dvh-4rem)] w-full max-w-full flex-1 p-4">
+            <div className="relative flex h-[calc(100dvh-4rem)] w-full max-w-full flex-1 gap-4 bg-slate-950/25 p-4">
                 {isFlowLoading && (
-                    <div className="absolute inset-0 z-50 flex items-center justify-center bg-background/50">
+                    <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm">
                         <Loader2 className="size-16 animate-spin" />
                     </div>
                 )}

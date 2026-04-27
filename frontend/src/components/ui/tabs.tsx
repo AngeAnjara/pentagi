@@ -9,9 +9,9 @@ const TabsList = React.forwardRef<
     React.ElementRef<typeof TabsPrimitive.List>,
     React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => (
-    <TabsPrimitive.List
+        <TabsPrimitive.List
         className={cn(
-            'inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground',
+            'inline-flex h-10 items-center justify-center rounded-xl border border-border/60 bg-slate-950/70 p-1 text-slate-400 shadow-inner backdrop-blur-sm',
             className,
         )}
         ref={ref}
@@ -24,9 +24,9 @@ const TabsTrigger = React.forwardRef<
     React.ElementRef<typeof TabsPrimitive.Trigger>,
     React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 >(({ className, ...props }, ref) => (
-    <TabsPrimitive.Trigger
+        <TabsPrimitive.Trigger
         className={cn(
-            'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',
+            'inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary/18 data-[state=active]:text-slate-50 data-[state=active]:shadow-[inset_0_0_0_1px_rgba(56,189,248,0.18)]',
             className,
         )}
         ref={ref}
