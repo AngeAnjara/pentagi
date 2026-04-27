@@ -3,6 +3,7 @@ package router
 import (
 	"encoding/json"
 	"encoding/gob"
+	"io"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -247,6 +248,13 @@ func NewRouter(
 		setIntegrationGroup(privateUserGroup, cfg)
 	}
 
+	uptimeProxyGroup := router.Group("/uptime/app")
+	uptimeProxyGroup.Use(authMiddleware.AuthUserRequired)
+	{
+		uptimeProxyGroup.Any("", newUptimeKumaProxyHandler(cfg))
+		uptimeProxyGroup.Any("/*proxyPath", newUptimeKumaProxyHandler(cfg))
+	}
+
 	if cfg.StaticURL != nil && cfg.StaticURL.Scheme != "" && cfg.StaticURL.Host != "" {
 		router.NoRoute(func() gin.HandlerFunc {
 			return func(c *gin.Context) {
@@ -315,9 +323,63 @@ func setIntegrationGroup(parent *gin.RouterGroup, cfg *config.Config) {
 			c.Header("Content-Type", "application/json")
 			_ = json.NewEncoder(c.Writer).Encode(gin.H{
 				"name": "Uptime Kuma",
-				"url":  cfg.UptimeKumaURL,
+				"url":  "/uptime/app/",
 			})
 		})
+	}
+}
+
+func newUptimeKumaProxyHandler(cfg *config.Config) gin.HandlerFunc {
+	targetURL, err := url.Parse(cfg.UptimeKumaURL)
+	if err != nil {
+		return func(c *gin.Context) {
+			c.JSON(http.StatusBadGateway, gin.H{
+				"error": "invalid uptime kuma url",
+			})
+		}
+	}
+
+	dialer := &net.Dialer{
+		Timeout:   30 * time.Second,
+		KeepAlive: 30 * time.Second,
+	}
+
+	proxy := httputil.NewSingleHostReverseProxy(targetURL)
+	proxy.Transport = &http.Transport{
+		DialContext:           dialer.DialContext,
+		ForceAttemptHTTP2:     true,
+		MaxIdleConns:          20,
+		IdleConnTimeout:       60 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+	}
+	proxy.ModifyResponse = func(resp *http.Response) error {
+		resp.Header.Del("X-Frame-Options")
+		resp.Header.Del("Content-Security-Policy")
+		resp.Header.Del("Content-Security-Policy-Report-Only")
+		return nil
+	}
+	proxy.ErrorHandler = func(rw http.ResponseWriter, req *http.Request, proxyErr error) {
+		rw.Header().Set("Content-Type", "application/json")
+		rw.WriteHeader(http.StatusBadGateway)
+		_, _ = io.WriteString(rw, `{"error":"uptime kuma unavailable"}`)
+	}
+
+	return func(c *gin.Context) {
+		c.Request.URL.Scheme = targetURL.Scheme
+		c.Request.URL.Host = targetURL.Host
+		c.Request.Host = targetURL.Host
+
+		proxyPath := c.Param("proxyPath")
+		if proxyPath == "" {
+			proxyPath = "/"
+		}
+		c.Request.URL.Path = path.Join(targetURL.Path, proxyPath)
+		if strings.HasSuffix(c.Request.URL.Path, "/socket.io") && strings.HasSuffix(c.Request.URL.RawQuery, "") {
+			c.Request.URL.Path = c.Request.URL.Path
+		}
+
+		proxy.ServeHTTP(c.Writer, c.Request)
 	}
 }
 

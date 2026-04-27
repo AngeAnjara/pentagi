@@ -41,10 +41,10 @@ const Login = () => {
                                 Santatra App
                             </div>
                             <h1 className="text-4xl font-semibold tracking-tight text-slate-50">
-                                Secure workflows, monitoring and operations in one workspace
+                                Flows, supervision et operations reunis dans un seul espace
                             </h1>
                             <p className="text-base leading-7 text-slate-400">
-                                Connect to your flows, integrated uptime console and system controls from a single authenticated shell.
+                                Connectez-vous a vos flows, a la console uptime integree et aux controles systeme depuis une interface unique.
                             </p>
                         </div>
                     </div>

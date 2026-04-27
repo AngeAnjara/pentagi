@@ -54,23 +54,23 @@ const statusConfig: Record<
     { label: string; variant: 'default' | 'destructive' | 'outline' | 'secondary' }
 > = {
     [StatusType.Created]: {
-        label: 'Created',
+        label: 'Cree',
         variant: 'outline',
     },
     [StatusType.Failed]: {
-        label: 'Failed',
+        label: 'Echec',
         variant: 'destructive',
     },
     [StatusType.Finished]: {
-        label: 'Finished',
+        label: 'Termine',
         variant: 'secondary',
     },
     [StatusType.Running]: {
-        label: 'Running',
+        label: 'En cours',
         variant: 'default',
     },
     [StatusType.Waiting]: {
-        label: 'Waiting',
+        label: 'En attente',
         variant: 'outline',
     },
 };
@@ -734,8 +734,8 @@ const Flows = () => {
                                 <GitFork className="size-4" />
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-muted-foreground text-[11px] font-medium uppercase tracking-[0.18em]">
-                                    Workspace
+                                    <span className="text-muted-foreground text-[11px] font-medium uppercase tracking-[0.18em]">
+                                    Espace
                                 </span>
                                 <BreadcrumbPage className="text-base font-semibold tracking-tight text-slate-50">
                                     Flows
@@ -751,7 +751,7 @@ const Flows = () => {
                     size="sm"
                 >
                     <Plus />
-                    New Flow
+                    Nouveau flow
                 </Button>
             </div>
         </header>
@@ -763,9 +763,9 @@ const Flows = () => {
                 {pageHeader}
                 <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 p-5">
                     <StatusCard
-                        description="Please wait while we fetch your conversation flows"
+                        description="Veuillez patienter pendant le chargement de vos flows."
                         icon={<Loader2 className="text-muted-foreground size-16 animate-spin" />}
-                        title="Loading flows..."
+                        title="Chargement des flows..."
                     />
                 </div>
             </>
@@ -785,12 +785,12 @@ const Flows = () => {
                                 variant="secondary"
                             >
                                 <Plus className="size-4" />
-                                New Flow
+                                Nouveau flow
                             </Button>
                         }
-                        description="Get started by creating your first conversation flow"
+                        description="Commencez par creer votre premier flow de conversation."
                         icon={<FileText className="text-muted-foreground size-8" />}
-                        title="No flows found"
+                        title="Aucun flow trouve"
                     />
                 </div>
             </>
@@ -806,7 +806,7 @@ const Flows = () => {
                     columnVisibility={columnVisibility}
                     data={flows}
                     filterColumn="title"
-                    filterPlaceholder="Filter flows..."
+                    filterPlaceholder="Filtrer les flows..."
                     onColumnVisibilityChange={(visibility) => {
                         Object.entries(visibility).forEach(([columnId, isVisible]) => {
                             if (columnVisibility[columnId] !== isVisible) {

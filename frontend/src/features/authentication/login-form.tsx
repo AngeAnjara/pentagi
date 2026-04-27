@@ -20,21 +20,21 @@ const formSchema = z.object({
     mail: z
         .string()
         .min(1, {
-            message: 'Login is required',
+            message: 'Le login est requis',
         })
         .refine(
             (value) => z.string().email().safeParse(value).success || ['admin', 'demo'].includes(value.toLowerCase()),
             {
-                message: 'Invalid login',
+                message: 'Login invalide',
             },
         ),
     password: z.string().min(1, {
-        message: 'Password is required',
+        message: 'Le mot de passe est requis',
     }),
 });
 
-const errorMessage = 'Invalid login or password';
-const errorProviderMessage = 'Authentication failed';
+const errorMessage = 'Login ou mot de passe invalide';
+const errorProviderMessage = "Echec de l'authentification";
 
 interface AuthProviderAction {
     icon: React.ReactNode;
@@ -46,12 +46,12 @@ const providerActions: AuthProviderAction[] = [
     {
         icon: <Google className="size-5" />,
         id: 'google',
-        name: 'Continue with Google',
+        name: 'Continuer avec Google',
     },
     {
         icon: <Github className="size-5" />,
         id: 'github',
-        name: 'Continue with GitHub',
+        name: 'Continuer avec GitHub',
     },
 ];
 
@@ -160,9 +160,9 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
         return (
             <div className="panel-shell mx-auto flex w-full max-w-[28rem] flex-col gap-6 p-8">
                 <div className="space-y-2 text-center">
-                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50">Update Password</h1>
+                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50">Mettre a jour le mot de passe</h1>
                     <p className="text-center text-sm leading-6 text-slate-400">
-                    You need to change your password before continuing.
+                    Vous devez changer votre mot de passe avant de continuer.
                     </p>
                 </div>
                 <PasswordChangeForm
@@ -183,9 +183,9 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
             >
                 <div className="space-y-3 text-center">
                     <div className="text-primary text-xs font-medium uppercase tracking-[0.28em]">Santatra App</div>
-                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50">Sign in</h1>
+                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50">Connexion</h1>
                     <p className="text-sm leading-6 text-slate-400">
-                        Access flows, monitoring and integrated tools from one secure workspace.
+                        Accedez aux flows, a la supervision et aux outils integres depuis un seul espace securise.
                     </p>
                 </div>
 
@@ -214,7 +214,7 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                                 <div className="w-full border-t border-slate-800" />
                             </div>
                             <div className="relative flex justify-center text-sm">
-                                <span className="bg-slate-950 px-2 text-slate-500">or</span>
+                                <span className="bg-slate-950 px-2 text-slate-500">ou</span>
                             </div>
                         </div>
                     </>
@@ -226,13 +226,13 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                         name="mail"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Login</FormLabel>
+                                <FormLabel>Identifiant</FormLabel>
                                 <FormControl>
                                     <Input
                                         {...field}
                                         autoFocus
                                         className="border-slate-800 bg-slate-900/70 text-slate-100 placeholder:text-slate-500"
-                                        placeholder="Enter your email"
+                                        placeholder="Entrez votre email"
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -245,12 +245,12 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel>Mot de passe</FormLabel>
                                 <FormControl>
                                     <Input
                                         {...field}
                                         className="border-slate-800 bg-slate-900/70 text-slate-100 placeholder:text-slate-500"
-                                        placeholder="Enter your password"
+                                        placeholder="Entrez votre mot de passe"
                                         type="password"
                                     />
                                 </FormControl>
@@ -265,7 +265,7 @@ const LoginForm = ({ providers, returnUrl = '/flows/new' }: LoginFormProps) => {
                         type="submit"
                     >
                         {isSubmitting && <Loader2 className="animate-spin" />}
-                        <span>Sign in</span>
+                        <span>Se connecter</span>
                     </Button>
 
                     {error && <FormMessage className="text-center">{error}</FormMessage>}

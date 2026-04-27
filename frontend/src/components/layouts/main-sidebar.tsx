@@ -183,7 +183,7 @@ const MainSidebar = () => {
                                 >
                                     <Link to="/uptime">
                                         <HeartPulse />
-                                        Uptime
+                                        Supervision
                                     </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
