@@ -7,7 +7,7 @@ const MainLayout = () => {
     return (
         <SidebarProvider>
             <MainSidebar />
-            <SidebarInset>
+            <SidebarInset className="bg-transparent">
                 <Outlet />
             </SidebarInset>
         </SidebarProvider>

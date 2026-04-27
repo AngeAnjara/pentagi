@@ -130,14 +130,15 @@ const MainSidebar = () => {
 
     return (
         <Sidebar collapsible="icon">
-            <SidebarHeader>
+            <SidebarHeader className="border-sidebar-border/70 border-b px-3 py-3">
                 <SidebarMenu>
                     <SidebarMenuItem className="flex items-center gap-2">
-                        <div className="flex aspect-square size-8 items-center justify-center">
+                        <div className="bg-primary/15 ring-primary/30 flex aspect-square size-9 items-center justify-center rounded-xl ring-1">
                             <Logo className="hover:animate-logo-spin size-6" />
                         </div>
                         <div className="grid flex-1 text-left leading-tight">
-                            <span className="truncate font-semibold">PentAGI</span>
+                            <span className="truncate font-semibold tracking-tight">PentAGI</span>
+                            <span className="text-muted-foreground truncate text-[11px]">AI workflow cockpit</span>
                         </div>
                     </SidebarMenuItem>
                 </SidebarMenu>
@@ -394,7 +395,7 @@ const MainSidebar = () => {
                     </SidebarGroup>
                 )}
             </SidebarContent>
-            <SidebarFooter>
+            <SidebarFooter className="border-sidebar-border/70 border-t px-2 py-3">
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton
@@ -411,7 +412,7 @@ const MainSidebar = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton
-                                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground bg-sidebar-accent/40 rounded-lg"
                                     size="lg"
                                 >
                                     <Avatar className="bg-background dark:bg-muted size-8 rounded-lg">
@@ -425,7 +426,7 @@ const MainSidebar = () => {
                                     </Avatar>
                                     <div className="grid flex-1 text-left text-sm leading-tight">
                                         <span className="truncate font-semibold">{user?.name}</span>
-                                        <span className="truncate text-xs">{user?.mail}</span>
+                                        <span className="text-muted-foreground truncate text-xs">{user?.mail}</span>
                                     </div>
                                     <ChevronsUpDown className="ml-auto size-4" />
                                 </SidebarMenuButton>

@@ -158,8 +158,8 @@ const Flow = () => {
     const [activeTabsTab, setActiveTabsTab] = useState<string>(!isDesktop ? 'automation' : 'terminal');
 
     const tabsCard = (
-        <div className="flex h-[calc(100dvh-3rem)] max-w-full flex-col rounded-none border-0">
-            <div className="flex-1 overflow-auto py-4 pl-4 pr-0">
+        <div className="panel-shell flex h-full max-w-full flex-col overflow-hidden">
+            <div className="flex-1 overflow-auto p-4 pr-2">
                 <FlowTabs
                     activeTab={activeTabsTab}
                     onTabChange={setActiveTabsTab}
@@ -170,12 +170,12 @@ const Flow = () => {
 
     return (
         <>
-            <header className="sticky top-0 z-10 flex h-12 w-full shrink-0 items-center gap-2 border-b bg-background transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-                <div className="flex w-full items-center justify-between gap-2 px-4">
+            <header className="bg-background/72 sticky top-0 z-10 flex h-16 w-full shrink-0 items-center gap-2 border-b border-white/8 backdrop-blur-md transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16">
+                <div className="flex w-full items-center justify-between gap-2 px-5">
                     <div className="flex items-center gap-2">
                         <SidebarTrigger className="-ml-1" />
                         <Separator
-                            className="mr-2 h-4"
+                            className="mr-2 h-5"
                             orientation="vertical"
                         />
                         <Breadcrumb>
@@ -194,7 +194,14 @@ const Flow = () => {
                                             />
                                         </>
                                     )}
-                                    <BreadcrumbPage>{flowData?.flow?.title || 'Select a flow'}</BreadcrumbPage>
+                                    <div className="flex flex-col">
+                                        <span className="text-muted-foreground text-[11px] font-medium uppercase tracking-[0.18em]">
+                                            Active Flow
+                                        </span>
+                                        <BreadcrumbPage className="max-w-[38vw] truncate text-base font-semibold tracking-tight">
+                                            {flowData?.flow?.title || 'Select a flow'}
+                                        </BreadcrumbPage>
+                                    </div>
                                 </BreadcrumbItem>
                             </BreadcrumbList>
                         </Breadcrumb>
@@ -202,7 +209,7 @@ const Flow = () => {
                     {!!(flowData?.tasks ?? [])?.length && <FlowReportDropdown />}
                 </div>
             </header>
-            <div className="relative flex h-[calc(100dvh-3rem)] w-full max-w-full flex-1">
+            <div className="relative flex h-[calc(100dvh-4rem)] w-full max-w-full flex-1 p-4">
                 {isFlowLoading && (
                     <div className="absolute inset-0 z-50 flex items-center justify-center bg-background/50">
                         <Loader2 className="size-16 animate-spin" />
@@ -217,8 +224,8 @@ const Flow = () => {
                             defaultSize={50}
                             minSize={30}
                         >
-                            <div className="flex h-[calc(100dvh-3rem)] max-w-full flex-col rounded-none border-0">
-                                <div className="flex-1 overflow-auto py-4 pl-4 pr-0">
+                            <div className="panel-shell flex h-full max-w-full flex-col overflow-hidden">
+                                <div className="flex-1 overflow-auto p-4 pr-2">
                                     <FlowCentralTabs />
                                 </div>
                             </div>

@@ -13,7 +13,7 @@ interface StatusCardProps {
 
 export function StatusCard({ action, className, description, icon, title }: StatusCardProps) {
     return (
-        <Card className={cn('', className)}>
+        <Card className={cn('panel-shell', className)}>
             <CardContent className="flex flex-col items-center justify-center px-4 py-8 text-center">
                 {icon && <div className="mb-4 flex items-center justify-center">{icon}</div>}
                 <h3 className="text-lg font-semibold text-foreground">{title}</h3>

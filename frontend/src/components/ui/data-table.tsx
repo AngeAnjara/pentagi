@@ -172,11 +172,11 @@ function DataTableInner<TData, TValue>(props: DataTableProps<TData, TValue>) {
     });
 
     return (
-        <div className="w-full">
-            <div className="flex items-center gap-4 py-4">
+        <div className="panel-shell w-full p-4">
+            <div className="flex flex-col gap-3 py-1 md:flex-row md:items-center">
                 {filterColumn && (
                     <Input
-                        className="max-w-sm"
+                        className="max-w-sm bg-background/70"
                         onChange={(event) => table.getColumn(filterColumn)?.setFilterValue(event.target.value)}
                         placeholder={filterPlaceholder}
                         value={(table.getColumn(filterColumn)?.getFilterValue() as string) ?? ''}
@@ -185,7 +185,7 @@ function DataTableInner<TData, TValue>(props: DataTableProps<TData, TValue>) {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button
-                            className="ml-auto"
+                            className="md:ml-auto"
                             variant="outline"
                         >
                             Columns <ChevronDown className="ml-2 h-4 w-4" />
@@ -211,11 +211,11 @@ function DataTableInner<TData, TValue>(props: DataTableProps<TData, TValue>) {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="rounded-md border">
+            <div className="overflow-hidden rounded-xl border border-border/70 bg-background/50">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
+                            <TableRow className="bg-muted/30 hover:bg-muted/30" key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
                                         <TableHead
@@ -245,7 +245,7 @@ function DataTableInner<TData, TValue>(props: DataTableProps<TData, TValue>) {
                             table.getRowModel().rows.map((row) => (
                                 <React.Fragment key={row.id}>
                                     <TableRow
-                                        className="group hover:bg-muted/50 cursor-pointer"
+                                        className="group hover:bg-primary/6 data-[state=selected]:bg-primary/10 cursor-pointer border-border/50"
                                         data-state={row.getIsSelected() && 'selected'}
                                         onClick={() => {
                                             if (onRowClick) {
@@ -294,7 +294,7 @@ function DataTableInner<TData, TValue>(props: DataTableProps<TData, TValue>) {
                         ) : (
                             <TableRow>
                                 <TableCell
-                                    className="h-24 text-center"
+                                    className="text-muted-foreground h-24 text-center"
                                     colSpan={columns.length}
                                 >
                                     No results.
@@ -304,7 +304,7 @@ function DataTableInner<TData, TValue>(props: DataTableProps<TData, TValue>) {
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-between gap-2 py-4">
+            <div className="flex flex-col items-start justify-between gap-3 py-4 md:flex-row md:items-center">
                 <div className="text-muted-foreground flex-1 text-sm">
                     {!!table.getFilteredSelectedRowModel().rows.length && (
                         <>
