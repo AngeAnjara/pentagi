@@ -23,7 +23,8 @@ networks:
 
 services:
   pentagi:
-    image: ${PENTAGI_IMAGE:-vxcontrol/pentagi:latest}
+    build: .
+    image: pentagi-local
     restart: unless-stopped
     container_name: pentagi
     hostname: pentagi
